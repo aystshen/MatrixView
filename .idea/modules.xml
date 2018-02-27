@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MatrixView.iml" filepath="$PROJECT_DIR$/MatrixView.iml" />
-      <module fileurl="file://$PROJECT_DIR$/example/app.iml" filepath="$PROJECT_DIR$/example/app.iml" />
+      <module fileurl="file://D:\code\MatrixView\example\app.iml" filepath="D:\code\MatrixView\example\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
       <module fileurl="file://$PROJECT_DIR$/matrixview/matrixview.iml" filepath="$PROJECT_DIR$/matrixview/matrixview.iml" />
     </modules>
   </component>
