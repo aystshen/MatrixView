@@ -24,7 +24,7 @@ public class MatrixView extends View {
     /**
      * Invalid item color
      */
-    private int mNullColor = 0x23000000;
+    private int mNegativeColor = 0x23000000;
 
     /**
      * Valid item color
@@ -32,21 +32,21 @@ public class MatrixView extends View {
     private int mActiveColor = 0xb3ffffff;
 
     /**
-     * Column highlighting color
+     * Column highlighted color
      */
-    private int mSelectedColor = 0xfffdfe29;
+    private int mHighlightedColor = 0xfffdfe29;
 
-    private int mPaintSelectedColor = mSelectedColor;
+    private int mPaintHighlightedColor = mHighlightedColor;
 
     /**
      * The number of rows
      */
-    private int mRow = 10;
+    private int mRowNumber = 10;
 
     /**
      * The number of columns
      */
-    private int mColumn = 10;
+    private int mColumnNumber = 10;
 
     /**
      * The row spacing
@@ -88,7 +88,7 @@ public class MatrixView extends View {
     /**
      * Select a column
      */
-    private int mSelectedIndex = -1;
+    private int mHighlightedIndex = -1;
 
     private int mAnimCount = 0;
 
@@ -107,7 +107,7 @@ public class MatrixView extends View {
      */
     private boolean mIsSupportEdit = false;
 
-    private Paint mNullPaint;
+    private Paint mNegativePaint;
     private Paint mActivePaint;
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
@@ -124,19 +124,19 @@ public class MatrixView extends View {
         super(context, attrs, defStyleAttr);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MatrixView, 0, 0);
 
-        mNullColor = a.getColor(R.styleable.MatrixView_null_color, mNullColor);
-        mActiveColor = a.getColor(R.styleable.MatrixView_active_color, mActiveColor);
-        mSelectedColor = a.getColor(R.styleable.MatrixView_accent_color, mSelectedColor);
-        mRow = a.getInteger(R.styleable.MatrixView_row, mRow);
-        mColumn = a.getInteger(R.styleable.MatrixView_column, mColumn);
-        mRowPadding = a.getDimensionPixelSize(R.styleable.MatrixView_row_padding, mRowPadding);
-        mColumnPadding = a.getDimensionPixelSize(R.styleable.MatrixView_column_padding, mColumnPadding);
-        mIsEnterAnim = a.getBoolean(R.styleable.MatrixView_enter_anim, mIsEnterAnim);
-        mIsSelectedAnim = a.getBoolean(R.styleable.MatrixView_selected_anim, mIsSelectedAnim);
-        mEnterAnimInterval = a.getInteger(R.styleable.MatrixView_enter_anim_interval, mEnterAnimInterval);
-        mSelectedAnimInterval = a.getInteger(R.styleable.MatrixView_selected_anim_interval, mSelectedAnimInterval);
-        mSelectedIndex = a.getInteger(R.styleable.MatrixView_selected_index, mSelectedIndex);
-        mIsSupportEdit = a.getBoolean(R.styleable.MatrixView_edit, mIsSupportEdit);
+        mNegativeColor = a.getColor(R.styleable.MatrixView_negativeColor, mNegativeColor);
+        mActiveColor = a.getColor(R.styleable.MatrixView_activeColor, mActiveColor);
+        mHighlightedColor = a.getColor(R.styleable.MatrixView_highlightedColor, mHighlightedColor);
+        mRowNumber = a.getInteger(R.styleable.MatrixView_rowNumber, mRowNumber);
+        mColumnNumber = a.getInteger(R.styleable.MatrixView_columnNumber, mColumnNumber);
+        mRowPadding = a.getDimensionPixelSize(R.styleable.MatrixView_rowPadding, mRowPadding);
+        mColumnPadding = a.getDimensionPixelSize(R.styleable.MatrixView_columnPadding, mColumnPadding);
+        mIsEnterAnim = a.getBoolean(R.styleable.MatrixView_enterAnim, mIsEnterAnim);
+        mIsSelectedAnim = a.getBoolean(R.styleable.MatrixView_highlightedAnim, mIsSelectedAnim);
+        mEnterAnimInterval = a.getInteger(R.styleable.MatrixView_enterAnimInterval, mEnterAnimInterval);
+        mSelectedAnimInterval = a.getInteger(R.styleable.MatrixView_highlightedAnimInterval, mSelectedAnimInterval);
+        mHighlightedIndex = a.getInteger(R.styleable.MatrixView_highlightedIndex, mHighlightedIndex);
+        mIsSupportEdit = a.getBoolean(R.styleable.MatrixView_enableEdit, mIsSupportEdit);
         a.recycle();
 
         init();
@@ -146,45 +146,45 @@ public class MatrixView extends View {
         this.setFocusable(mIsSupportEdit);
         this.setFocusableInTouchMode(mIsSupportEdit);
 
-        mNullPaint = new Paint();
-        mNullPaint.setAntiAlias(true);
-        mNullPaint.setStyle(Paint.Style.FILL);
-        mNullPaint.setColor(mNullColor);
+        mNegativePaint = new Paint();
+        mNegativePaint.setAntiAlias(true);
+        mNegativePaint.setStyle(Paint.Style.FILL);
+        mNegativePaint.setColor(mNegativeColor);
 
         mActivePaint = new Paint();
         mActivePaint.setAntiAlias(true);
         mActivePaint.setStyle(Paint.Style.FILL);
         mActivePaint.setColor(mActiveColor);
 
-        mArray = new int[mColumn];
+        mArray = new int[mColumnNumber];
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        mItemWidth = (getWidth() - (mRowPadding * (mColumn - 1))) / mColumn;
-        mItemHeight = (getHeight() - (mColumnPadding * (mRow - 1))) / mRow;
+        mItemWidth = (getWidth() - (mRowPadding * (mColumnNumber - 1))) / mColumnNumber;
+        mItemHeight = (getHeight() - (mColumnPadding * (mRowNumber - 1))) / mRowNumber;
 
-        int rowBiases = (getHeight() - mRow * mItemHeight - (mColumnPadding * (mRow - 1))) / 2;
-        int columnBiases = (getWidth() - mColumn * mItemWidth - (mRowPadding * (mColumn - 1))) / 2;
+        int rowBiases = (getHeight() - mRowNumber * mItemHeight - (mColumnPadding * (mRowNumber - 1))) / 2;
+        int columnBiases = (getWidth() - mColumnNumber * mItemWidth - (mRowPadding * (mColumnNumber - 1))) / 2;
 
-        for (int i = 0; i < mColumn; i++) {
-            for (int j = 0; j < mRow; j++) {
+        for (int i = 0; i < mColumnNumber; i++) {
+            for (int j = 0; j < mRowNumber; j++) {
                 Rect rect = new Rect();
                 rect.left = mColumnPadding * i + mItemWidth * i + columnBiases;
                 rect.right = rect.left + mItemWidth;
                 rect.top = mRowPadding * j + mItemHeight * j + rowBiases;
                 rect.bottom = rect.top + mItemHeight;
-                if (mArray != null && i < mArray.length && (mRow - j) <= mArray[i]) {
-                    if (i == mSelectedIndex) {
-                        mActivePaint.setColor(mPaintSelectedColor);
+                if (mArray != null && i < mArray.length && (mRowNumber - j) <= mArray[i]) {
+                    if (i == mHighlightedIndex) {
+                        mActivePaint.setColor(mPaintHighlightedColor);
                     } else {
                         mActivePaint.setColor(mActiveColor);
                     }
                     canvas.drawRect(rect, mActivePaint);
                 } else {
-                    canvas.drawRect(rect, mNullPaint);
+                    canvas.drawRect(rect, mNegativePaint);
                 }
             }
         }
@@ -198,20 +198,20 @@ public class MatrixView extends View {
             int row = 0;
             int column = 0;
 
-            for (int i = 0; i < mColumn; i++) {
+            for (int i = 0; i < mColumnNumber; i++) {
                 if (x < (i + 1) * (mItemWidth + mColumnPadding)) {
                     column = i;
                     break;
                 }
             }
-            for (int i = 0; i < mRow; i++) {
+            for (int i = 0; i < mRowNumber; i++) {
                 if (y < (i + 1) * (mItemHeight + mRowPadding)) {
                     row = i + 1;
                     break;
                 }
             }
 
-            mArray[column] = mRow - row;
+            mArray[column] = mRowNumber - row;
             invalidate();
 
             return true;
@@ -233,7 +233,7 @@ public class MatrixView extends View {
             if (mIsEnterAnim) {
                 mHandler.postDelayed(mEnterAnimRunnable, mEnterAnimInterval);
             } else {
-                for (int i = 0; i < (mSrcArray.length < mColumn ? mSrcArray.length : mColumn); i++) {
+                for (int i = 0; i < (mSrcArray.length < mColumnNumber ? mSrcArray.length : mColumnNumber); i++) {
                     mArray[i] = mSrcArray[i];
                 }
                 invalidate();
@@ -249,9 +249,9 @@ public class MatrixView extends View {
         mHandler.removeCallbacks(mEnterAnimRunnable);
         mHandler.removeCallbacks(mSelectedAnimRunnable);
 
-        mPaintSelectedColor = mActiveColor;
+        mPaintHighlightedColor = mActiveColor;
         mAnimCount = 0;
-        mSelectedIndex = -1;
+        mHighlightedIndex = -1;
 
         for (int i = 0; i < mArray.length; i++) {
             mArray[i] = 0;
@@ -273,16 +273,16 @@ public class MatrixView extends View {
      *
      * @param index
      */
-    public void setSelected(int index) {
-        if (mSelectedIndex != index && mSrcArray != null && index < mSrcArray.length) {
-            mSelectedIndex = index;
+    public void setHighlight(int index) {
+        if (mHighlightedIndex != index && mSrcArray != null && index < mSrcArray.length) {
+            mHighlightedIndex = index;
             mHandler.removeCallbacks(mSelectedAnimRunnable);
-            mPaintSelectedColor = mActiveColor;
-            if (mSelectedIndex >= 0) {
+            mPaintHighlightedColor = mActiveColor;
+            if (mHighlightedIndex >= 0) {
                 if (mIsSelectedAnim) {
                     mHandler.postDelayed(mSelectedAnimRunnable, mSelectedAnimInterval);
                 } else {
-                    mPaintSelectedColor = mSelectedColor;
+                    mPaintHighlightedColor = mHighlightedColor;
                     invalidate();
                 }
             }
@@ -294,21 +294,21 @@ public class MatrixView extends View {
      *
      * @return
      */
-    public int getSelected() {
-        return mSelectedIndex;
+    public int getHighlight() {
+        return mHighlightedIndex;
     }
 
     /**
-     * Set the invalid item to display the color.
+     * Set the negative item to display the color.
      *
      * @param color
      */
-    public void setNullColor(int color) {
-        mNullColor = color;
+    public void setNegativeColor(int color) {
+        mNegativeColor = color;
     }
 
     /**
-     * Set the valid item to display the color.
+     * Set the active item to display the color.
      *
      * @param color
      */
@@ -321,8 +321,8 @@ public class MatrixView extends View {
      *
      * @param color
      */
-    public void setSelectedColor(int color) {
-        mSelectedColor = color;
+    public void setHighlightedColor(int color) {
+        mHighlightedColor = color;
     }
 
     /**
@@ -330,8 +330,8 @@ public class MatrixView extends View {
      *
      * @param row
      */
-    public void setRow(int row) {
-        mRow = row;
+    public void setRowNumber(int row) {
+        mRowNumber = row;
     }
 
     /**
@@ -339,8 +339,8 @@ public class MatrixView extends View {
      *
      * @param column
      */
-    public void setColumn(int column) {
-        mColumn = column;
+    public void setColumnNumber(int column) {
+        mColumnNumber = column;
     }
 
     /**
@@ -375,7 +375,7 @@ public class MatrixView extends View {
      *
      * @param isSupport
      */
-    public void setSupportSelectedAnim(boolean isSupport) {
+    public void setSupportHighlightedAnim(boolean isSupport) {
         mIsSelectedAnim = isSupport;
     }
 
@@ -393,7 +393,7 @@ public class MatrixView extends View {
      *
      * @param interval
      */
-    public void setSelectedAnimInterval(int interval) {
+    public void setHighlightedAnimInterval(int interval) {
         mSelectedAnimInterval = interval;
     }
 
@@ -412,9 +412,9 @@ public class MatrixView extends View {
     private Runnable mEnterAnimRunnable = new Runnable() {
         @Override
         public void run() {
-            if (mAnimCount < mRow) {
+            if (mAnimCount < mRowNumber) {
                 mAnimCount++;
-                for (int i = 0; i < (mSrcArray.length < mColumn ? mSrcArray.length : mColumn); i++) {
+                for (int i = 0; i < (mSrcArray.length < mColumnNumber ? mSrcArray.length : mColumnNumber); i++) {
                     mArray[i] = (mArray[i] < mSrcArray[i] ? mArray[i] + 1 : mArray[i]);
                 }
                 invalidate();
@@ -429,11 +429,11 @@ public class MatrixView extends View {
     private Runnable mSelectedAnimRunnable = new Runnable() {
         @Override
         public void run() {
-            if (mSelectedIndex >= 0) {
-                if (mPaintSelectedColor == mSelectedColor) {
-                    mPaintSelectedColor = mNullColor;
+            if (mHighlightedIndex >= 0) {
+                if (mPaintHighlightedColor == mHighlightedColor) {
+                    mPaintHighlightedColor = mNegativeColor;
                 } else {
-                    mPaintSelectedColor = mSelectedColor;
+                    mPaintHighlightedColor = mHighlightedColor;
                 }
                 invalidate();
                 mHandler.postDelayed(this, mSelectedAnimInterval);

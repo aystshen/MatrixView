@@ -1,15 +1,26 @@
 # MatrixView
+
+[![](https://img.shields.io/badge/downloads-20k-brightgreen.svg)](https://bintray.com/freeman/maven/MatrixView)
+[![](https://img.shields.io/badge/demo-1.0-orange.svg)](http://osxdy7if8.bkt.clouddn.com/MatrixView-example-release.apk)
+
 MatrixView is a matrix chart, similar to a histogram, is used to display data chart, it also supports editing function, draw the trajectory of fingers on the diagram according to the corresponding data path generation, chart display will show the animation for the first time, support a particular column highlighted or flash animation.
 
 ## Preview
 ![image](screenshots/device-2018-02-26-174120.png)
 
 
-## Setup
-- In Eclipse, just import the MatrixView as an Android library project. Project > Clean to generate the binaries you need, like R.java, etc.
-- Then, just add MatrixView as a dependency to your existing project and you're good to go!
+## Using MatrixView in your application
+### ADT	
+	No more support
 
-## How to Integrate this Library into Your Projects
+### Gradle ​ 
+Add dependencies in build.gradle of your module:  
+
+	dependencies {
+		compile 'com.ayst.matrixview:matrixview:1.0'
+	}
+
+## Usage
 ### Simple Example
 ```
 public class MainActivity extends AppCompatActivity {
@@ -23,20 +34,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mMatrixView = (MatrixView) findViewById(R.id.matrix_view);
-        mMatrixView.setNullColor(getResources().getColor(R.color.black_30));
+        mMatrixView.setNegativeColor(getResources().getColor(R.color.black_30));
         mMatrixView.setActiveColor(getResources().getColor(R.color.colorAccent));
-        mMatrixView.setSelectedColor(getResources().getColor(R.color.red));
-        mMatrixView.setColumn(15);
-        mMatrixView.setRow(20);
+        mMatrixView.setHighlightedColor(getResources().getColor(R.color.red));
+        mMatrixView.setColumnNumber(15);
+        mMatrixView.setRowNumber(20);
         mMatrixView.setColumnPadding(3);
         mMatrixView.setRowPadding(3);
         mMatrixView.setSupportEnterAnim(true);
-        mMatrixView.setSupportSelectedAnim(true);
+        mMatrixView.setSupportHighlightedAnim(true);
         mMatrixView.setEnterAnimInterval(50);
-        mMatrixView.setSelectedAnimInterval(500);
+        mMatrixView.setHighlightedAnimInterval(500);
         mMatrixView.setSupportEdit(true);
         mMatrixView.show(mExampleData); // Show chart
-        mMatrixView.setSelected(5); // Set highlight column
+        mMatrixView.setHighlight(5); // Set highlight column
     }
 }
 ```
@@ -44,44 +55,44 @@ public class MainActivity extends AppCompatActivity {
 ### XML Usage
 If you decide to use MatrixView as a view, you can define it in your xml layouts like this:
  
-	<com.ayst.matrixview.MatrixView   
-        android:id="@+id/matrix_view"  
-        android:layout_width="350dp"  
-        android:layout_height="230dp"  
+	<com.ayst.matrixview.MatrixView
+        android:id="@+id/matrix_view"
+        android:layout_width="350dp"
+        android:layout_height="230dp"
         android:layout_margin="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:accent_color="@color/gold_dark"
-        app:active_color="@color/red"
-        app:column="15"
-        app:column_padding="3dp"
-        app:edit="true"
-        app:enter_anim="true"
-        app:enter_anim_interval="50"
-        app:null_color="@color/black_30"
-        app:row="20"
-        app:row_padding="3dp"
-        app:selected_anim="true"
-        app:selected_anim_interval="500"
-        app:selected_index="5" />
+        app:activeColor="@color/red"
+        app:columnNumber="15"
+        app:columnPadding="3dp"
+        app:enableEdit="true"
+        app:enterAnim="true"
+        app:enterAnimInterval="50"
+        app:highlightedAnim="true"
+        app:highlightedAnimInterval="500"
+        app:highlightedColor="@color/gold_dark"
+        app:highlightedIndex="5"
+        app:negativeColor="@color/black_30"
+        app:rowNumber="20"
+        app:rowPadding="3dp" />
 
 NOTE:  
 
-* `null_color` - Invalid item color
-* `active_color` - Valid item color
-* `accent_color` - Column highlighting color
-* `row` - The number of rows
-* `column` - The number of column
-* `row_padding` - The row spacing
-* `column_padding` - The column spacing
-* `enter_anim` - Supported enter animation
-* `selected_anim` - Supported selected animation
-* `enter_anim_interval` - Enter the animation time interval
-* `selected_anim_interval` - Selected the animation time interval
-* `selected_index` - Select a column
-* `edit` - Supported edit
+* `negativeColor` - Negative item color
+* `activeColor` - Active item color
+* `highlightedColor` - Column highlighted color
+* `rowNumber` - The number of rows
+* `columnNumber` - The number of column
+* `rowPadding` - The row spacing
+* `columnPadding` - The column spacing
+* `enterAnim` - Supported enter animation
+* `highlightedAnim` - Supported highlighted animation
+* `enterAnimInterval` - Enter the animation time interval
+* `highlightedAnimInterval` - Highlighted the animation time interval
+* `highlightedIndex` - Highlighted a column
+* `enableEdit` - Supported edit
 
 ## Developed By
 * ayst.shen@foxmail.com

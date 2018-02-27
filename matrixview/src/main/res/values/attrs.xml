@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="MatrixView">
-        <attr name="null_color" format="color" />
-        <attr name="active_color" format="color" />
-        <attr name="accent_color" format="color" />
-        <attr name="row" format="integer" />
-        <attr name="column" format="integer" />
-        <attr name="row_padding" format="dimension" />
-        <attr name="column_padding" format="dimension" />
-        <attr name="enter_anim" format="boolean" />
-        <attr name="selected_anim" format="boolean" />
-        <attr name="enter_anim_interval" format="integer" />
-        <attr name="selected_anim_interval" format="integer" />
-        <attr name="selected_index" format="integer" />
-        <attr name="edit" format="boolean" />
+        <attr name="negativeColor" format="color" />negative
+        <attr name="activeColor" format="color" />
+        <attr name="highlightedColor" format="color" />
+        <attr name="rowNumber" format="integer" />
+        <attr name="columnNumber" format="integer" />
+        <attr name="rowPadding" format="dimension" />
+        <attr name="columnPadding" format="dimension" />
+        <attr name="enterAnim" format="boolean" />
+        <attr name="highlightedAnim" format="boolean" />
+        <attr name="enterAnimInterval" format="integer" />
+        <attr name="highlightedAnimInterval" format="integer" />
+        <attr name="highlightedIndex" format="integer" />
+        <attr name="enableEdit" format="boolean" />
     </declare-styleable>
 </resources>
