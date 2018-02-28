@@ -1,6 +1,6 @@
 # MatrixView
 
-[![](https://img.shields.io/badge/downloads-20k-brightgreen.svg)](https://bintray.com/freeman/maven/MatrixView)
+[![](https://img.shields.io/badge/downloads-20k-brightgreen.svg)](https://bintray.com/hbshen/maven/MatrixView)
 [![](https://img.shields.io/badge/demo-1.0-orange.svg)](http://osxdy7if8.bkt.clouddn.com/MatrixView-example-release.apk)
 
 MatrixView is a matrix chart, similar to a histogram, is used to display data chart, it also supports editing function, draw the trajectory of fingers on the diagram according to the corresponding data path generation, chart display will show the animation for the first time, support a particular column highlighted or flash animation.

@@ -100,7 +100,7 @@ bintray {
     key = isHasFile ? properties.getProperty("bintray.apikey") : System.getenv("bintray.apikey")
     configurations = ['archives']
     pkg {
-        userOrg = "freeman"
+        //userOrg = "freeman"
         repo = "maven"
         name = "MatrixView"
         websiteUrl = siteUrl
