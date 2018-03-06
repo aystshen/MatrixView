@@ -107,6 +107,16 @@ public class MatrixView extends View {
      */
     private boolean mIsSupportEdit = false;
 
+    /**
+     * min value.
+     */
+    private int mMinValue = 0;
+
+    /**
+     * max value.
+     */
+    private int mMaxValue = 0;
+
     private Paint mNegativePaint;
     private Paint mActivePaint;
 
@@ -137,6 +147,10 @@ public class MatrixView extends View {
         mSelectedAnimInterval = a.getInteger(R.styleable.MatrixView_highlightedAnimInterval, mSelectedAnimInterval);
         mHighlightedIndex = a.getInteger(R.styleable.MatrixView_highlightedIndex, mHighlightedIndex);
         mIsSupportEdit = a.getBoolean(R.styleable.MatrixView_enableEdit, mIsSupportEdit);
+        mMinValue = a.getInteger(R.styleable.MatrixView_minEditValue, 0);
+        mMaxValue = a.getInteger(R.styleable.MatrixView_maxEditValue, mRowNumber);
+        mMinValue = (mMinValue < 0 ? 0 : mMinValue);
+        mMaxValue = (mMaxValue > mRowNumber ? mRowNumber : mMaxValue);
         a.recycle();
 
         init();
@@ -211,7 +225,8 @@ public class MatrixView extends View {
                 }
             }
 
-            mArray[column] = mRowNumber - row;
+            int value = mRowNumber - row;
+            mArray[column] = (value < mMinValue ? mMinValue : (value > mMaxValue ? mMaxValue : value));
             invalidate();
 
             return true;
@@ -404,6 +419,24 @@ public class MatrixView extends View {
      */
     public void setSupportEdit(boolean isSupport) {
         mIsSupportEdit = isSupport;
+    }
+
+    /**
+     * Set edit min value.
+     *
+     * @param value
+     */
+    public void setMinValue(int value) {
+        mMinValue = (value < 0 ? 0 : value);
+    }
+
+    /**
+     * Set edit max value.
+     *
+     * @param value
+     */
+    public void setMaxValue(int value) {
+        mMaxValue = (value > mRowNumber ? mRowNumber : value);
     }
 
     /**

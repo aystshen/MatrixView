@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         mMatrixView.setEnterAnimInterval(50);
         mMatrixView.setHighlightedAnimInterval(500);
         mMatrixView.setSupportEdit(true);
+		mMatrixView.setMinValue(1);
+        mMatrixView.setMaxValue(20);
         mMatrixView.show(mExampleData); // Show chart
         mMatrixView.setHighlight(5); // Set highlight column
     }
@@ -64,19 +66,21 @@ If you decide to use MatrixView as a view, you can define it in your xml layouts
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:negativeColor="@color/black_30"
         app:activeColor="@color/red"
+        app:highlightedColor="@color/gold_dark"
+        app:rowNumber="20"
         app:columnNumber="15"
+        app:rowPadding="3dp"
         app:columnPadding="3dp"
-        app:enableEdit="true"
         app:enterAnim="true"
         app:enterAnimInterval="50"
         app:highlightedAnim="true"
         app:highlightedAnimInterval="500"
-        app:highlightedColor="@color/gold_dark"
         app:highlightedIndex="5"
-        app:negativeColor="@color/black_30"
-        app:rowNumber="20"
-        app:rowPadding="3dp" />
+        app:enableEdit="true"
+        app:minEditValue="1"
+        app:maxEditValue="20"/>
 
 NOTE:  
 
@@ -93,6 +97,8 @@ NOTE:
 * `highlightedAnimInterval` - Highlighted the animation time interval
 * `highlightedIndex` - Highlighted a column
 * `enableEdit` - Supported edit
+* `minEditValue` - The minimum value allowed for editing. 
+* `maxEditValue` - The maximum value allowed for editing.
 
 ## Developed By
 * ayst.shen@foxmail.com

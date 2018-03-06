@@ -15,18 +15,20 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:negativeColor="@color/black_30"
         app:activeColor="@color/red"
+        app:highlightedColor="@color/gold_dark"
+        app:rowNumber="20"
         app:columnNumber="15"
+        app:rowPadding="3dp"
         app:columnPadding="3dp"
-        app:enableEdit="true"
         app:enterAnim="true"
         app:enterAnimInterval="50"
         app:highlightedAnim="true"
         app:highlightedAnimInterval="500"
-        app:highlightedColor="@color/gold_dark"
         app:highlightedIndex="5"
-        app:negativeColor="@color/black_30"
-        app:rowNumber="20"
-        app:rowPadding="3dp" />
+        app:enableEdit="true"
+        app:minEditValue="1"
+        app:maxEditValue="20"/>
 
 </android.support.constraint.ConstraintLayout>

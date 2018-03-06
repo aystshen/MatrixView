@@ -14,5 +14,7 @@
         <attr name="highlightedAnimInterval" format="integer" />
         <attr name="highlightedIndex" format="integer" />
         <attr name="enableEdit" format="boolean" />
+        <attr name="minEditValue" format="integer" />
+        <attr name="maxEditValue" format="integer" />
     </declare-styleable>
 </resources>

@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         mMatrixView.setEnterAnimInterval(50);
         mMatrixView.setHighlightedAnimInterval(500);
         mMatrixView.setSupportEdit(true);
+        mMatrixView.setMinValue(1);
+        mMatrixView.setMaxValue(20);
         mMatrixView.show(mExampleData); // Show chart
         mMatrixView.setHighlight(5); // Set highlight column
     }
