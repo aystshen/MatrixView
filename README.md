@@ -6,7 +6,7 @@
 MatrixView is a matrix chart, similar to a histogram, is used to display data chart, it also supports editing function, draw the trajectory of fingers on the diagram according to the corresponding data path generation, chart display will show the animation for the first time, support a particular column highlighted or flash animation.
 
 ## Preview
-![image](screenshots/device-2018-02-26-174120.png)
+![image](screenshots/device-2018-03-07-165506.png)
 
 
 ## Using MatrixView in your application
@@ -17,7 +17,7 @@ MatrixView is a matrix chart, similar to a histogram, is used to display data ch
 Add dependencies in build.gradle of your module:  
 
 	dependencies {
-		compile 'com.ayst.matrixview:matrixview:1.0'
+		compile 'com.ayst.matrixview:matrixview:1.4'
 	}
 
 ## Usage
