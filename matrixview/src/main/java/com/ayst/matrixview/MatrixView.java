@@ -8,7 +8,6 @@ import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -216,13 +215,11 @@ public class MatrixView extends View {
             int width = getWidth();
             int height = getHeight();
             int row = mRowNumber;
-            int column = mColumnNumber;
+            int column = mColumnNumber-1;
 
-            Log.i("MatrixView", "onTouchEvent: x=" + x + ", y=" + y + ", width=" + width + ", height=" + height);
-
-            if (x < 0+mRowBiases || x > width-mRowBiases || y < 0+mColumnBiases || y > height-mColumnBiases) {
-                return true;
-            }
+//            if (x < 0+mRowBiases || x > width-mRowBiases || y < 0+mColumnBiases || y > height-mColumnBiases) {
+//                return true;
+//            }
 
             for (int i = 0; i < mColumnNumber; i++) {
                 if (x < (i + 1) * (mItemWidth + mColumnPadding)) {
