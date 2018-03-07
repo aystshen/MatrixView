@@ -8,7 +8,7 @@ import com.ayst.matrixview.MatrixView;
 public class MainActivity extends AppCompatActivity {
 
     private MatrixView mMatrixView;
-    private int[] mExampleData = {10, 9, 8, 5, 15, 17, 19, 18, 16, 10, 10, 12, 13, 14, 15};
+    private int[] mExampleData = {3, 4, 5, 15, 14, 10, 19, 18, 16, 15, 14, 12, 5, 4, 1};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         mMatrixView.setEnterAnimInterval(50);
         mMatrixView.setHighlightedAnimInterval(500);
         mMatrixView.setSupportEdit(true);
-        mMatrixView.setMinValue(1);
+        mMatrixView.setMinValue(0);
         mMatrixView.setMaxValue(20);
         mMatrixView.show(mExampleData); // Show chart
         mMatrixView.setHighlight(5); // Set highlight column

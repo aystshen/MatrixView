@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -117,6 +118,9 @@ public class MatrixView extends View {
      */
     private int mMaxValue = 0;
 
+    private int mRowBiases = 0;
+    private int mColumnBiases = 0;
+
     private Paint mNegativePaint;
     private Paint mActivePaint;
 
@@ -180,15 +184,15 @@ public class MatrixView extends View {
         mItemWidth = (getWidth() - (mRowPadding * (mColumnNumber - 1))) / mColumnNumber;
         mItemHeight = (getHeight() - (mColumnPadding * (mRowNumber - 1))) / mRowNumber;
 
-        int rowBiases = (getHeight() - mRowNumber * mItemHeight - (mColumnPadding * (mRowNumber - 1))) / 2;
-        int columnBiases = (getWidth() - mColumnNumber * mItemWidth - (mRowPadding * (mColumnNumber - 1))) / 2;
+        mRowBiases = (getHeight() - mRowNumber * mItemHeight - (mColumnPadding * (mRowNumber - 1))) / 2;
+        mColumnBiases = (getWidth() - mColumnNumber * mItemWidth - (mRowPadding * (mColumnNumber - 1))) / 2;
 
         for (int i = 0; i < mColumnNumber; i++) {
             for (int j = 0; j < mRowNumber; j++) {
                 Rect rect = new Rect();
-                rect.left = mColumnPadding * i + mItemWidth * i + columnBiases;
+                rect.left = mColumnPadding * i + mItemWidth * i + mColumnBiases;
                 rect.right = rect.left + mItemWidth;
-                rect.top = mRowPadding * j + mItemHeight * j + rowBiases;
+                rect.top = mRowPadding * j + mItemHeight * j + mRowBiases;
                 rect.bottom = rect.top + mItemHeight;
                 if (mArray != null && i < mArray.length && (mRowNumber - j) <= mArray[i]) {
                     if (i == mHighlightedIndex) {
@@ -209,8 +213,16 @@ public class MatrixView extends View {
         if (mIsSupportEdit) {
             int x = (int) event.getX();
             int y = (int) event.getY();
-            int row = 0;
-            int column = 0;
+            int width = getWidth();
+            int height = getHeight();
+            int row = mRowNumber;
+            int column = mColumnNumber;
+
+            Log.i("MatrixView", "onTouchEvent: x=" + x + ", y=" + y + ", width=" + width + ", height=" + height);
+
+            if (x < 0+mRowBiases || x > width-mRowBiases || y < 0+mColumnBiases || y > height-mColumnBiases) {
+                return true;
+            }
 
             for (int i = 0; i < mColumnNumber; i++) {
                 if (x < (i + 1) * (mItemWidth + mColumnPadding)) {
@@ -220,7 +232,7 @@ public class MatrixView extends View {
             }
             for (int i = 0; i < mRowNumber; i++) {
                 if (y < (i + 1) * (mItemHeight + mRowPadding)) {
-                    row = i + 1;
+                    row = i;
                     break;
                 }
             }
