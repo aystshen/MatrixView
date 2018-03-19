@@ -298,17 +298,21 @@ public class MatrixView extends View {
      * @param index
      */
     public void setHighlight(int index) {
-        if (mHighlightedIndex != index && mSrcArray != null && index < mSrcArray.length) {
+        if (mHighlightedIndex != index) {
             mHighlightedIndex = index;
             mHandler.removeCallbacks(mSelectedAnimRunnable);
             mPaintHighlightedColor = mActiveColor;
-            if (mHighlightedIndex >= 0) {
-                if (mIsSelectedAnim) {
-                    mHandler.postDelayed(mSelectedAnimRunnable, mSelectedAnimInterval);
-                } else {
-                    mPaintHighlightedColor = mHighlightedColor;
-                    invalidate();
+            if (index >=0 && index < mColumnNumber) {
+                if (mHighlightedIndex >= 0) {
+                    if (mIsSelectedAnim) {
+                        mHandler.postDelayed(mSelectedAnimRunnable, mSelectedAnimInterval);
+                    } else {
+                        mPaintHighlightedColor = mHighlightedColor;
+                        invalidate();
+                    }
                 }
+            } else {
+                invalidate();
             }
         }
     }

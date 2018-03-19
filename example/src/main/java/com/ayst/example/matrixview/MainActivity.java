@@ -2,6 +2,8 @@ package com.ayst.example.matrixview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.ayst.matrixview.MatrixView;
 
@@ -32,5 +34,16 @@ public class MainActivity extends AppCompatActivity {
         mMatrixView.setMaxValue(20);
         mMatrixView.show(mExampleData); // Show chart
         mMatrixView.setHighlight(5); // Set highlight column
+
+        ((Button)findViewById(R.id.btn_start)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mMatrixView.getHighlight() >= 0) {
+                    mMatrixView.setHighlight(-1);
+                } else {
+                    mMatrixView.setHighlight(0);
+                }
+            }
+        });
     }
 }

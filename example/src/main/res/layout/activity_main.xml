@@ -4,31 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ayst.example.matrixview.MainActivity">
+    tools:context="com.ayst.example.matrixview.MainActivity"
+    tools:layout_editor_absoluteY="81dp">
 
     <com.ayst.matrixview.MatrixView
         android:id="@+id/matrix_view"
         android:layout_width="350dp"
         android:layout_height="230dp"
         android:layout_margin="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:negativeColor="@color/black_30"
+        android:layout_marginBottom="8dp"
         app:activeColor="@color/red"
-        app:highlightedColor="@color/gold_dark"
-        app:rowNumber="20"
         app:columnNumber="15"
-        app:rowPadding="3dp"
         app:columnPadding="3dp"
+        app:enableEdit="true"
         app:enterAnim="true"
         app:enterAnimInterval="50"
         app:highlightedAnim="true"
         app:highlightedAnimInterval="500"
+        app:highlightedColor="@color/gold_dark"
         app:highlightedIndex="5"
-        app:enableEdit="true"
+        app:layout_constraintBottom_toTopOf="@+id/btn_start"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxEditValue="20"
         app:minEditValue="1"
-        app:maxEditValue="20"/>
+        app:negativeColor="@color/black_30"
+        app:rowNumber="20"
+        app:rowPadding="3dp" />
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
