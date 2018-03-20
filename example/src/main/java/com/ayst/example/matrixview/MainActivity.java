@@ -45,5 +45,31 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        ((Button)findViewById(R.id.btn_minus)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int[] array = mMatrixView.getArray();
+                int index = mMatrixView.getHighlight();
+                if (array != null && index >= 0 && index < array.length) {
+                    if (array[index] > 0) {
+                        mMatrixView.updateHighlightValue(array[index]-1);
+                    }
+                }
+            }
+        });
+
+        ((Button)findViewById(R.id.btn_plus)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int[] array = mMatrixView.getArray();
+                int index = mMatrixView.getHighlight();
+                if (array != null && index >= 0 && index < array.length) {
+                    if (array[index] < mMatrixView.getRowNumber()) {
+                        mMatrixView.updateHighlightValue(array[index]+1);
+                    }
+                }
+            }
+        });
     }
 }

@@ -327,6 +327,16 @@ public class MatrixView extends View {
     }
 
     /**
+     * Update the current highlight value.
+     */
+    public void updateHighlightValue(int value) {
+        if (mArray != null && mHighlightedIndex >= 0 && mHighlightedIndex < mArray.length) {
+            mArray[mHighlightedIndex] = value;
+            invalidate();
+        }
+    }
+
+    /**
      * Set the negative item to display the color.
      *
      * @param color
@@ -363,12 +373,26 @@ public class MatrixView extends View {
     }
 
     /**
+     * Get the number of rows
+     */
+    public int getRowNumber() {
+        return mRowNumber;
+    }
+
+    /**
      * Set the number of column
      *
      * @param column
      */
     public void setColumnNumber(int column) {
         mColumnNumber = column;
+    }
+
+    /**
+     * Get the number of column
+     */
+    public int getColumnNumber() {
+        return mColumnNumber;
     }
 
     /**
