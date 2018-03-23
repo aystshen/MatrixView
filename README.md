@@ -1,12 +1,12 @@
 # MatrixView
 
 [![](https://img.shields.io/badge/downloads-20k-brightgreen.svg)](https://bintray.com/hbshen/maven/MatrixView)
-[![](https://img.shields.io/badge/demo-1.0-orange.svg)](http://osxdy7if8.bkt.clouddn.com/MatrixView-example-release.apk)
+[![](https://img.shields.io/badge/demo-1.0-orange.svg)](http://osxdy7if8.bkt.clouddn.com/MatrixView-example-release_1.0.apk)
 
 MatrixView is a matrix chart, similar to a histogram, is used to display data chart, it also supports editing function, draw the trajectory of fingers on the diagram according to the corresponding data path generation, chart display will show the animation for the first time, support a particular column highlighted or flash animation.
 
 ## Preview
-![image](screenshots/device-2018-03-07-165506.png)
+![image](screenshots/device-2018-03-23-090946.png)
 
 
 ## Using MatrixView in your application
@@ -17,12 +17,12 @@ MatrixView is a matrix chart, similar to a histogram, is used to display data ch
 Add dependencies in build.gradle of your module:  
 
 	dependencies {
-		compile 'com.ayst.matrixview:matrixview:1.4'
+		compile 'com.ayst.matrixview:matrixview:1.4.3'
 	}
 
 ## Usage
 ### Simple Example
-```
+```  
 public class MainActivity extends AppCompatActivity {
 
     private MatrixView mMatrixView;
@@ -34,22 +34,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mMatrixView = (MatrixView) findViewById(R.id.matrix_view);
-        mMatrixView.setNegativeColor(getResources().getColor(R.color.black_30));
-        mMatrixView.setActiveColor(getResources().getColor(R.color.colorAccent));
-        mMatrixView.setHighlightedColor(getResources().getColor(R.color.red));
-        mMatrixView.setColumnNumber(15);
-        mMatrixView.setRowNumber(20);
-        mMatrixView.setColumnPadding(3);
-        mMatrixView.setRowPadding(3);
-        mMatrixView.setSupportEnterAnim(true);
-        mMatrixView.setSupportHighlightedAnim(true);
-        mMatrixView.setEnterAnimInterval(50);
-        mMatrixView.setHighlightedAnimInterval(500);
-        mMatrixView.setSupportEdit(true);
-		mMatrixView.setMinValue(1);
-        mMatrixView.setMaxValue(20);
         mMatrixView.show(mExampleData); // Show chart
-        mMatrixView.setHighlight(5); // Set highlight column
+	
+        // Set highlight column
+        mMatrixView.setHighlight(5); 
+
+        // Update hightlight column value 
+        mMatrixView.updateHighlightValue(10);
     }
 }
 ```

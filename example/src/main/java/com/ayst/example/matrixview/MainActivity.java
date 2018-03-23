@@ -18,22 +18,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mMatrixView = (MatrixView) findViewById(R.id.matrix_view);
-        mMatrixView.setNegativeColor(getResources().getColor(R.color.black_30));
-        mMatrixView.setActiveColor(getResources().getColor(R.color.colorAccent));
-        mMatrixView.setHighlightedColor(getResources().getColor(R.color.red));
-        mMatrixView.setColumnNumber(15);
-        mMatrixView.setRowNumber(20);
-        mMatrixView.setColumnPadding(3);
-        mMatrixView.setRowPadding(3);
-        mMatrixView.setSupportEnterAnim(true);
-        mMatrixView.setSupportHighlightedAnim(true);
-        mMatrixView.setEnterAnimInterval(50);
-        mMatrixView.setHighlightedAnimInterval(500);
-        mMatrixView.setSupportEdit(true);
-        mMatrixView.setMinValue(0);
-        mMatrixView.setMaxValue(20);
         mMatrixView.show(mExampleData); // Show chart
-        mMatrixView.setHighlight(5); // Set highlight column
+
+        // Set highlight column
+        mMatrixView.setHighlight(5);
 
         ((Button)findViewById(R.id.btn_start)).setOnClickListener(new View.OnClickListener() {
             @Override
